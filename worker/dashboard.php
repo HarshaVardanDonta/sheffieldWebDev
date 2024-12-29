@@ -40,9 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_service'])) {
     exit;
 }
 
-// Fetch services created by workers
-$sql = "SELECT services.*, workers.username AS worker_username FROM services JOIN workers ON services.worker_id = workers.id WHERE approved = 0";
+// Fetch services created by the logged-in worker
+$worker_id = $_SESSION["worker_id"];
+$sql = "SELECT services.*, workers.username AS worker_username FROM services JOIN workers ON services.worker_id = workers.id WHERE services.worker_id = ? AND approved = 0";
 if ($stmt = $conn->prepare($sql)) {
+    $stmt->bind_param("i", $worker_id);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
