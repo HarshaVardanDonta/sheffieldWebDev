@@ -154,7 +154,7 @@ if ($booking_stmt = $conn->prepare($booking_sql)) {
                         <td>
                             <form action="approve_booking.php" method="POST">
                                 <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                                <button clas type="submit">Accept</button>
+                                <button class="btn" type="submit">Accept</button>
                             </form>
                         </td>
                     </tr>
