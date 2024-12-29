@@ -31,24 +31,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Sign Up</title>
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../css/userSignUp.css">
 </head>
 
 <body>
-    <h2>User Sign Up</h2>
-    <form action="" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+    <div class="container">
+        <h2>User Sign Up</h2>
+        <form action="" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="sign-in.php">Sign In</a></p>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="sign-in.php">Sign In</a></p>
+    </div>
+
 </body>
 
 </html>
