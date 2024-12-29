@@ -26,13 +26,13 @@ if (isset($_SESSION['user_role'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to the Service Management System</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body>
-    <h1>Welcome to the Service Management System</h1>
+<body class="container">
+    <div class="header">
+        <p>Welcome to the Service Management System</p>
+    </div>
     <p>Please choose your role to proceed:</p>
     <ul>
         <li><a href="admin/sign-in.php">Admin Sign In</a></li>
@@ -46,6 +46,10 @@ if (isset($_SESSION['user_role'])) {
         <li><a href="worker/sign-up.php">Worker</a></li>
         <li><a href="user/sign-up.php">User</a></li>
     </ul>
+
+    <div class="footer">
+        <p>&copy; 2021 Service Management System</p>
+    </div>
 </body>
 
 </html>
