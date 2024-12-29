@@ -35,123 +35,126 @@ $previous_bookings_result = $previous_bookings_stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../css/userDash.css">
     <title>User Dashboard</title>
 </head>
 
 <body>
     <header>
-        <h1>User Dashboard</h1>
-        <a href="sign-out.php">Sign Out</a>
+        User Dashboard
+        <a class="btn" href="sign-out.php">Sign Out</a>
     </header>
-    <main>
-        <h2>List of available services</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Service ID</th>
-                    <th>Service Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Created By</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if ($result->num_rows > 0): ?>
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['name']; ?></td>
-                            <td><?php echo $row['description']; ?></td>
-                            <td><?php echo $row['price']; ?></td>
-                            <td><?php echo $row['worker_username']; ?></td>
-                            <td>
-                                <form action="avail_service.php" method="POST">
-                                    <input type="hidden" name="service_id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit">Avail Service</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
+    <div class="container">
+        <main>
+            <h2>List of available services</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="6">No approved services found.</td>
+                        <th>Service ID</th>
+                        <th>Service Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Created By</th>
+                        <th>Action</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-
-        <h2>Active Bookings</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Service Name</th>
-                    <th>Worker</th>
-                    <th>Booking Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if ($bookings_result->num_rows > 0): ?>
-                    <?php while ($row = $bookings_result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['service_name']; ?></td>
-                            <td><?php echo $row['worker_username']; ?></td>
-                            <td><?php echo $row['booking_date']; ?></td>
-                            <td><?php echo $row['status'] == 1 ? 'Accepted by worker' : ($row['status'] == 2 ? 'Completed' : 'Pending'); ?>
-                            </td>
-                            <td>
-                                <?php if ($row['status'] == 1): ?>
-                                    <form action="complete_booking.php" method="POST">
-                                        <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                                        <button type="submit">Mark as Completed</button>
+                </thead>
+                <tbody>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['name']; ?></td>
+                                <td><?php echo $row['description']; ?></td>
+                                <td><?php echo $row['price']; ?></td>
+                                <td><?php echo $row['worker_username']; ?></td>
+                                <td>
+                                    <form action="avail_service.php" method="POST">
+                                        <input type="hidden" name="service_id" value="<?php echo $row['id']; ?>">
+                                        <button class="btn" type="submit">Avail Service</button>
                                     </form>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="6">No bookings found.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-
-        <h2>Previous Bookings</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Service Name</th>
-                    <th>Worker</th>
-                    <th>Booking Date</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if ($previous_bookings_result->num_rows > 0): ?>
-                    <?php while ($row = $previous_bookings_result->fetch_assoc()): ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
                         <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['service_name']; ?></td>
-                            <td><?php echo $row['worker_username']; ?></td>
-                            <td><?php echo $row['booking_date']; ?></td>
-                            <td>Completed</td>
+                            <td colspan="6">No approved services found.</td>
                         </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
+            <h2>Active Bookings</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="5">No previous bookings found.</td>
+                        <th>Booking ID</th>
+                        <th>Service Name</th>
+                        <th>Worker</th>
+                        <th>Booking Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </main>
+                </thead>
+                <tbody>
+                    <?php if ($bookings_result->num_rows > 0): ?>
+                        <?php while ($row = $bookings_result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['service_name']; ?></td>
+                                <td><?php echo $row['worker_username']; ?></td>
+                                <td><?php echo $row['booking_date']; ?></td>
+                                <td><?php echo $row['status'] == 1 ? 'Accepted by worker' : ($row['status'] == 2 ? 'Completed' : 'Pending'); ?>
+                                </td>
+                                <td>
+                                    <?php if ($row['status'] == 1): ?>
+                                        <form action="complete_booking.php" method="POST">
+                                            <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
+                                            <button class="btn" type="submit">Mark as Completed</button>
+                                        </form>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6">No bookings found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
+            <h2>Previous Bookings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Service Name</th>
+                        <th>Worker</th>
+                        <th>Booking Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($previous_bookings_result->num_rows > 0): ?>
+                        <?php while ($row = $previous_bookings_result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['service_name']; ?></td>
+                                <td><?php echo $row['worker_username']; ?></td>
+                                <td><?php echo $row['booking_date']; ?></td>
+                                <td>Completed</td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5">No previous bookings found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
 </body>
 
 </html>
