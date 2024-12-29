@@ -141,9 +141,7 @@ if ($booking_stmt = $conn->prepare($booking_sql)) {
         <table>
             <tr>
                 <th>Booking ID</th>
-                <th>Service Name</th>
-                <th>Service Description</th>
-                <th>Service Price</th>
+                <th>Service ID</th>
                 <th>Booked By</th>
                 <th>Action</th>
             </tr>
@@ -151,21 +149,19 @@ if ($booking_stmt = $conn->prepare($booking_sql)) {
                 <?php while ($row = $booking_result->fetch_assoc()): ?>
                     <tr>
                         <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['service_name']; ?></td>
-                        <td><?php echo $row['service_description']; ?></td>
-                        <td><?php echo $row['service_price']; ?></td>
+                        <td><?php echo $row['service_id']; ?></td>
                         <td><?php echo $row['user_username']; ?></td>
                         <td>
                             <form action="approve_booking.php" method="POST">
                                 <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit">Approve</button>
+                                <button clas type="submit">Accept</button>
                             </form>
                         </td>
                     </tr>
                 <?php endwhile; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6">No pending bookings.</td>
+                    <td colspan="4">No pending bookings.</td>
                 </tr>
             <?php endif; ?>
         </table>
