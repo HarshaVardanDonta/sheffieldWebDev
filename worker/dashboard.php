@@ -61,6 +61,16 @@ if ($booking_stmt = $conn->prepare($booking_sql)) {
 } else {
     die("Prepare failed: " . $conn->error);
 }
+
+// Fetch completed bookings for the worker's services
+$completed_booking_sql = "SELECT bookings.*, users.username AS user_username, services.name AS service_name FROM bookings JOIN users ON bookings.user_id = users.id JOIN services ON bookings.service_id = services.id WHERE services.worker_id = ? AND bookings.status = 2";
+if ($completed_booking_stmt = $conn->prepare($completed_booking_sql)) {
+    $completed_booking_stmt->bind_param("i", $worker_id);
+    $completed_booking_stmt->execute();
+    $completed_booking_result = $completed_booking_stmt->get_result();
+} else {
+    die("Prepare failed: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -165,6 +175,35 @@ if ($booking_stmt = $conn->prepare($booking_sql)) {
                 </tr>
             <?php endif; ?>
         </table>
+
+        <h2>Completed Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Service Name</th>
+                    <th>Booked By</th>
+                    <th>Booking Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($completed_booking_result->num_rows > 0): ?>
+                    <?php while ($row = $completed_booking_result->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['service_name']; ?></td>
+                            <td><?php echo $row['user_username']; ?></td>
+                            <td><?php echo $row['booking_date']; ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="4">No completed bookings.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+
 
         <?php $stmt->close(); ?>
         <?php $booking_stmt->close(); ?>
