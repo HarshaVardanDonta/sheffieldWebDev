@@ -21,19 +21,23 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/adminDash.css">
     <title>Admin Dashboard</title>
 </head>
 
 <body>
-    <h1>Admin Dashboard</h1>
-    <a href="./sign-out.php">Sign Out</a>
+    <header>
+        Admin Dashboard
+        <a class="btn" href="./sign-out.php">Sign Out</a>
+    </header>
+
 
     <h2>Pending Services to be approved</h2>
     <table>
         <tr>
             <th>Service ID</th>
             <th>Service Name</th>
+            <th>Worker Id</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -42,18 +46,19 @@ $result = $conn->query($sql);
                 <tr>
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['worker_id']; ?></td>
                     <td><?php echo $row['approved'] == 0 ? 'Pending' : 'Approved'; ?></td>
                     <td>
                         <form action="approve_service.php" method="POST">
                             <input type="hidden" name="service_id" value="<?php echo $row['id']; ?>">
-                            <button type="submit">Approve</button>
+                            <button class="btn" type="submit">Approve</button>
                         </form>
                     </td>
                 </tr>
             <?php endwhile; ?>
         <?php else: ?>
             <tr>
-                <td colspan="3">No pending services.</td>
+                <td colspan="5">No pending services to be approved.</td>
             </tr>
         <?php endif; ?>
     </table>
