@@ -7,38 +7,32 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Include database connection
-require_once '../config.php';
+include_once '../config.php';
 
-// Check if the connection is established
-if ($conn === null) {
-    die("Database connection failed.");
-}
-
-// Check if booking_id is set in POST request
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['booking_id'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['booking_id']) && isset($_POST['rating'])) {
     $booking_id = $_POST['booking_id'];
-    $user_id = $_SESSION['user_id'];
+    $rating = $_POST['rating'];
+    $review = isset($_POST['review']) ? $_POST['review'] : '';
 
-    // Update the status of the booking to 2 (completed)
-    $sql = "UPDATE bookings SET status = 2 WHERE id = ? AND user_id = ?";
+    // Update booking status to completed and record rating and review
+    $sql = "UPDATE bookings SET status = 2, rating = ?, review = ? WHERE id = ? AND user_id = ?";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("ii", $booking_id, $user_id);
+        $stmt->bind_param("isii", $rating, $review, $booking_id, $_SESSION['user_id']);
         if ($stmt->execute()) {
-            $success_message = "Booking marked as completed.";
+            $_SESSION['success_message'] = "Booking marked as completed.";
         } else {
-            $error_message = "Error: " . $stmt->error;
+            $_SESSION['error_message'] = "Error: " . $stmt->error;
         }
         $stmt->close();
     } else {
-        $error_message = "Prepare failed: " . $conn->error;
+        $_SESSION['error_message'] = "Prepare failed: " . $conn->error;
     }
 
-    // Redirect to the dashboard page
+    // Redirect to the user dashboard
     header("Location: dashboard.php");
     exit();
 } else {
-    // Redirect to the dashboard page if booking_id is not set
+    $_SESSION['error_message'] = "Invalid request.";
     header("Location: dashboard.php");
     exit();
 }

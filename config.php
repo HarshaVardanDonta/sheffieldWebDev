@@ -28,6 +28,8 @@ $tables = [
         service_id INT NOT NULL,
         booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         status TINYINT(1) DEFAULT 0,
+        rating TINYINT(1) DEFAULT NULL,
+        review TEXT DEFAULT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
         FOREIGN KEY (service_id) REFERENCES services(id)
     )",

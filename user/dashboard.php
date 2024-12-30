@@ -21,7 +21,7 @@ $bookings_stmt->execute();
 $bookings_result = $bookings_stmt->get_result();
 
 // Fetch previous bookings (completed)
-$previous_bookings_query = "SELECT bookings.*, services.name AS service_name, workers.username AS worker_username FROM bookings JOIN services ON bookings.service_id = services.id JOIN workers ON services.worker_id = workers.id WHERE bookings.user_id = ? AND bookings.status = 2";
+$previous_bookings_query = "SELECT bookings.*, services.name AS service_name, workers.username AS worker_username, bookings.rating, bookings.review FROM bookings JOIN services ON bookings.service_id = services.id JOIN workers ON services.worker_id = workers.id WHERE bookings.user_id = ? AND bookings.status = 2";
 $previous_bookings_stmt = $conn->prepare($previous_bookings_query);
 $previous_bookings_stmt->bind_param("i", $user_id);
 $previous_bookings_stmt->execute();
@@ -108,7 +108,20 @@ $previous_bookings_result = $previous_bookings_stmt->get_result();
                                 <td>
                                     <?php if ($row['status'] == 1): ?>
                                         <form action="complete_booking.php" method="POST">
-                                            <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
+                                            <div class="reviewBox">
+                                                <input type="hidden" name="booking_id" value="<?php echo $row['id']; ?>">
+                                                <label for="rating">Rating:</label>
+                                                <select name="rating" required>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                                <label for="review">Review:</label>
+                                                <textarea name="review" placeholder="Optional review"></textarea>
+                                            </div>
+
                                             <button class="btn" type="submit">Mark as Completed</button>
                                         </form>
                                     <?php endif; ?>
@@ -132,6 +145,8 @@ $previous_bookings_result = $previous_bookings_stmt->get_result();
                         <th>Worker</th>
                         <th>Booking Date</th>
                         <th>Status</th>
+                        <th>Rating</th>
+                        <th>Review</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,11 +158,13 @@ $previous_bookings_result = $previous_bookings_stmt->get_result();
                                 <td><?php echo $row['worker_username']; ?></td>
                                 <td><?php echo $row['booking_date']; ?></td>
                                 <td>Completed</td>
+                                <td><?php echo $row['rating']; ?></td>
+                                <td><?php echo $row['review']; ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5">No previous bookings found.</td>
+                            <td colspan="7">No previous bookings found.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
