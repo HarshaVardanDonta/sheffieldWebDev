@@ -83,11 +83,11 @@ my-php-html-project
 4. Modify the `config.php` file to match your MySQL database configuration:
    ```php
    <?php
-   $servername = ""; // Change this to your database server name if different
-   $username = "";        // Change this to your database username
-   $password = "";   // Change this to your database password
-   $dbname = ""; // Change this to your database name
-   $port = ;              // Change this to your database port if different
+   $servername = "";  // Change this to your database server name if different
+   $username = "";    // Change this to your database username
+   $password = "";    // Change this to your database password
+   $dbname = "";      // Change this to your database name
+   $port = ;          // Change this to your database port if different
    ?>
    ```
 5. Access the application via your web browser at
