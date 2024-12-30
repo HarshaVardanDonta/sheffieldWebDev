@@ -1,11 +1,11 @@
-body{
+body {
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-header{
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,44 +16,56 @@ header{
     font-size: 20px;
     padding: 10px;
 }
-.container{
+
+.container {
     width: 80%;
     margin: 0 auto;
     overflow: hidden;
     padding: 0;
 }
-a{
+
+a {
     text-decoration: none;
     color: white;
 }
 
-table{
+table {
     width: 100%;
     border-collapse: collapse;
     margin: 0;
     padding: 0;
 }
 
-tr{
+tr {
     border-bottom: 1px solid #cbcbcb;
 }
-th{
+
+th {
     font-size: 19px;
     color: #fff;
     background: #333;
     padding: 10px;
 }
-td{
+
+td {
     padding: 10px;
     text-align: center;
     border: 1px solid #000000;
 }
 
-.btn{
-    padding: 10px;
+.btn {
+    padding: 10px 20px;
     font-size: 15px;
     color: white;
     background: #5F9EA0;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+
+.btn:hover {
+    background: #3e8e41;
 }

@@ -1,9 +1,10 @@
-body{
+body {
     margin: 0px;
     padding: 0px;
     font-family: Arial, sans-serif;
 }
-.header{
+
+.header {
     position: fixed;
     left: 0;
     top: 0;
@@ -17,35 +18,48 @@ body{
     font-size: 20px;
     font-weight: bold;
 }
-.container{
+
+.container {
     margin-top: 50px;
     padding: 20px;
 }
-.footer{
+
+.footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     background-color: #333;
     color: white;
-    padding:5px;
+    padding: 5px;
     margin: 0px;
     text-align: center;
 }
 
-ul{
+ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    border-radius: 5px;
+    margin: 5px;
+    width: 150px;
+
 }
-li{
+
+li {
     float: left;
 }
-a{
+
+/* li hover */
+li a:hover {
+    background-color: #111;
+}
+
+a {
     display: block;
     text-align: center;
-    padding: 14px 16px;
+    padding: 5px 16px;
     text-decoration: none;
     color: white;
     background-color: #333;

@@ -84,17 +84,15 @@ if ($completed_booking_stmt = $conn->prepare($completed_booking_sql)) {
 </head>
 
 <body>
-    <header>
-        Welcome to the Worker Dashboard
-        <div>
-            <button class="btn" onclick="location.href='my-services.php'">My Services</button>
+    <button class="drawer-toggle" onclick="toggleDrawer()">☰</button>
 
-            <a class="btn" href="sign-out.php">
-                <?php echo htmlspecialchars($_SESSION["worker_username"]); ?> Sign Out
-            </a>
-        </div>
 
-    </header>
+    <div class="drawer" id="drawer">
+        <h2>Worker Dashboard</h2>
+        <button class="btn" onclick="location.href='dashboard.php'">Dashboard</button>
+        <button class="btn" onclick="location.href='my-services.php'">My Services</button>
+        <button class="btn" onclick="location.href='sign-out.php'">Sign Out</button>
+    </div>
     <div class="container">
         <h2>Create a New Service</h2>
         <?php
@@ -215,6 +213,11 @@ if ($completed_booking_stmt = $conn->prepare($completed_booking_sql)) {
 
     </div>
 
+    <script>
+        function toggleDrawer() {
+            document.getElementById('drawer').classList.toggle('open');
+        }
+    </script>
 </body>
 
 </html>

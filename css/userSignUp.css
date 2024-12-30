@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -9,7 +9,7 @@ body{
     height: 100vh;
 }
 
-.container{
+.container {
     width: 400px;
     background-color: #fff;
     padding: 30px;
@@ -17,13 +17,13 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-label{
+label {
     font-size: 18px;
     font-weight: 500;
     color: #333;
 }
 
-.container input{
+.container input {
     width: calc(100% - 20px);
     padding: 10px;
     margin: 5px;
@@ -31,7 +31,7 @@ label{
     border-radius: 5px;
 }
 
-.container button{
+.container button {
     width: 100%;
     padding: 10px;
     margin: 5px;
@@ -40,4 +40,8 @@ label{
     background-color: #333;
     color: #fff;
     cursor: pointer;
+}
+
+.container button:hover {
+    background-color: #222;
 }
