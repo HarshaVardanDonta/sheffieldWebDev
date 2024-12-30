@@ -85,13 +85,17 @@ if ($completed_booking_stmt = $conn->prepare($completed_booking_sql)) {
 
 <body>
     <header>
-        Welcome to the Worker Dashboard <a class="btn" href="sign-out.php">Sign Out</a>
+        Welcome to the Worker Dashboard
+        <div>
+            <button class="btn" onclick="location.href='my-services.php'">My Services</button>
+
+            <a class="btn" href="sign-out.php">
+                <?php echo htmlspecialchars($_SESSION["worker_username"]); ?> Sign Out
+            </a>
+        </div>
+
     </header>
     <div class="container">
-
-        <!-- <p>Hello, <?php echo htmlspecialchars($_SESSION["worker_username"]); ?>!</p> -->
-
-
         <h2>Create a New Service</h2>
         <?php
         if (!empty($success_message)) {
